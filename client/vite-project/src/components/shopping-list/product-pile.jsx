@@ -28,7 +28,7 @@ function ShoppingProductTile({
             </Badge>
           ) : product?.salePrice > 0 ? (
             <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
-              Sale
+              On Sale
             </Badge>
           ) : null}
         </div>

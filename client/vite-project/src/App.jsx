@@ -14,7 +14,7 @@ import ShoppingLayout from './components/shopping-list/layout';
 import ShoppingListing from './pages/shopping-list/listing';
 import ShoppingAccount from './pages/shopping-list/account';
 import ShoppingCheckout from './pages/shopping-list/checkout';
-import PaypalReturnPage from './pages/shopping-list/paypalreturn';
+import PaypalReturnPage from './pages/shopping-list/paymentreturn';
 import PaymentSuccessPage from './pages/shopping-list/paymentsuccess';
 import SearchProducts from './pages/shopping-list/search';
 import { Toaster } from './components/ui/toaster';
@@ -24,7 +24,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { Skeleton } from './components/ui/skeleton';
-
+import PaymentReturnPage from './pages/shopping-list/paymentreturn';
 
 function App() {
 
@@ -73,6 +73,8 @@ function App() {
           <Route path="paypal-return" element={<PaypalReturnPage />} />
           <Route path="payment-success" element={<PaymentSuccessPage />} />
           <Route path="search" element={<SearchProducts />} />
+          <Route path="payment-return" element={<PaymentReturnPage />} />
+
           </Route>
           <Route path="*" element={<NotFound />}/>
           <Route path ="/auth-page" element = {<UnauthPage />} />

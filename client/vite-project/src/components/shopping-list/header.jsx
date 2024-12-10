@@ -93,7 +93,7 @@ function HeaderRightContent() {
         </Button>
         <UserCartWrapper cartItems={cartItems && cartItems.items && cartItems.items.length > 0
               ? cartItems.items
-              : []} />
+              : []} setOpenCartSheet={setOpenCartSheet}/>
       </Sheet>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

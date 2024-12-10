@@ -7,7 +7,8 @@ const adminProductsRouter = require("./route/admin/product-route");
 const productRouter = require("./route/shop/product-route");
 const shopCartRouter = require("./route/shop/cart-route");
 const addressRouter = require("./route/shop/address-route");
-
+const orderRouter = require("./route/shop/order-route");
+const adminOrderRouter = require("./route/admin/order-route");
 mongoose
   .connect("mongodb+srv://warrenwu:qewyop58458@cluster0.nxe7y.mongodb.net/")
   .then(() => console.log("MongoDB connected"))
@@ -34,9 +35,15 @@ app.use(
 
 app.use(cookiePaser());
 app.use(express.json());
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
 app.use("/api/auth",authRouter);
 app.use("/api/admin/products",adminProductsRouter);
 app.use("/api/shop/products",productRouter);
 app.use("/api/shop/cart", shopCartRouter);
 app.use("/api/shop/address", addressRouter);
+app.use("/api/shop/order", orderRouter);
+app.use("/api/admin/order", adminOrderRouter);
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));
