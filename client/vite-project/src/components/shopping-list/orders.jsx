@@ -37,6 +37,7 @@ function ShoppingOrders() {
   }, [orderDetails]);
 
   console.log(orderDetails, "orderDetails");
+  console.log(orderList,"orderList")
 
 
    return (

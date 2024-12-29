@@ -66,17 +66,71 @@ export const registerFormControls = [
       ],
     },
     {
-      label: "Brand",
-      name: "brand",
-      componentType: "select",
-      options: [
-        { id: "nike", label: "Nike" },
-        { id: "adidas", label: "Adidas" },
-        { id: "puma", label: "Puma" },
-        { id: "levi", label: "Levi's" },
-        { id: "zara", label: "Zara" },
-        { id: "h&m", label: "H&M" },
+    label: "Types",
+    name: "types",
+    componentType: "select",
+    options: {
+      men: [
+        { id: "shirts", label: "Shirts" },
+        { id: "polo", label: "Polo" },
+        { id: "jackets", label: "Jackets" },
+        { id: "suits", label: "Suits" },
+        { id: "pants", label:"Pants"},
       ],
+      women: [
+        { id: "dresses", label: "Dresses" },
+        { id: "blouses", label: "Blouses" },
+        { id: "skirts", label: "Skirts" },
+        { id: "coats", label: "Coats" },
+        { id: "shirts", label: "Shirts" }
+      ],
+      kids: [
+        { id: "tops", label: "Tops" },
+        { id: "bottoms", label: "Bottoms" },
+        { id: "outerwear", label: "Outerwear" },
+        { id: "school-uniforms", label: "School Uniforms" },
+      ],
+      accessories: [
+        { id: "bags", label: "Bags" },
+        { id: "belts", label: "Belts" },
+        { id: "hats", label: "Hats" },
+        { id: "sunglasses", label: "Sunglasses" },
+      ],
+      footwear: [
+        { id: "sneakers", label: "Sneakers" },
+        { id: "boots", label: "Boots" },
+        { id: "sandals", label: "Sandals" },
+        { id: "dress-shoes", label: "Dress Shoes" },
+      ],
+    },
+  },
+    {
+      label:"Size",
+      name:"size",
+      componentType:"select",
+      options:[
+        {id:"xxs",label:"XXS"},
+        {id:"xs",label:"XS"},
+        {id: "s",label:"S"},
+        {id: "m",label:"M"},
+        {id: "l",label:"L"},
+        {id: "xl",label:"XL"},
+        {id: "xxl", lael:"XXL"},
+      ]
+    },
+    {
+      label:"Colour",
+      name:"colour",
+      componentType:"select",
+      options:[
+        {id:"white",label:"White"},
+        {id:"black",label:"Black"},
+        {id: "red",label:"Red"},
+        {id: "green",label:"Green"},
+        {id: "orange",label:"orange"},
+        {id: "blue",label:"Blue"},
+        {id: "grey", lael:"Grey"},
+      ]
     },
     {
       label: "Price",
@@ -152,13 +206,56 @@ export const registerFormControls = [
       { id: "accessories", label: "Accessories" },
       { id: "footwear", label: "Footwear" },
     ],
-    brand: [
-      { id: "nike", label: "Nike" },
-      { id: "adidas", label: "Adidas" },
-      { id: "puma", label: "Puma" },
-      { id: "levi", label: "Levi's" },
-      { id: "zara", label: "Zara" },
-      { id: "h&m", label: "H&M" },
+    types: {
+      men: [
+        { id: "shirts", label: "Shirts" },
+        { id: "polo", label: "Polo" },
+        { id: "jackets", label: "Jackets" },
+        { id: "suits", label: "Suits" },
+        { id: "pants", label: "Pants" },
+      ],
+      women: [
+        { id: "dresses", label: "Dresses" },
+        { id: "blouses", label: "Blouses" },
+        { id: "skirts", label: "Skirts" },
+        { id: "coats", label: "Coats" },
+      ],
+      kids: [
+        { id: "tops", label: "Tops" },
+        { id: "bottoms", label: "Bottoms" },
+        { id: "outerwear", label: "Outerwear" },
+        { id: "school-uniforms", label: "School Uniforms" },
+      ],
+      accessories: [
+        { id: "bags", label: "Bags" },
+        { id: "belts", label: "Belts" },
+        { id: "hats", label: "Hats" },
+        { id: "sunglasses", label: "Sunglasses" },
+      ],
+      footwear: [
+        { id: "sneakers", label: "Sneakers" },
+        { id: "boots", label: "Boots" },
+        { id: "sandals", label: "Sandals" },
+        { id: "dress-shoes", label: "Dress Shoes" },
+      ],
+    },
+    size: [
+      { id: "xxs", label: "XXS" },
+      { id: "xs", label: "XS" },
+      { id: "s", label: "S" },
+      { id: "m", label: "M" },
+      { id: "l", label: "L" },
+      { id: "xl", label: "XL" },
+      { id: "xxl", label: "XXL" },
+    ],
+    colour: [
+      { id: "white", label: "White" },
+      { id: "black", label: "Black" },
+      { id: "red", label: "Red" },
+      { id: "green", label: "Green" },
+      { id: "orange", label: "Orange" },
+      { id: "blue", label: "Blue" },
+      { id: "grey", label: "Grey" },
     ],
   };
 

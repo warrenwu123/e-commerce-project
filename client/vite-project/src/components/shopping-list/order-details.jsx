@@ -12,6 +12,7 @@ function ShoppingOrderDetailsView({ orderDetails }) {
   console.log(approvalURL, "approvalURL");
 
   const handleContinuePayment = () => {
+    console.log(approvalURL,"approvalURL")
     // Redirect to PayPal approval URL if it exists in orderDetails
     if (approvalURL) {
       window.location.href = approvalURL;

@@ -67,7 +67,7 @@ function ShoppingListing () {
         cpyFilters[getSectionId].push(getCurrentOption);
       else cpyFilters[getSectionId].splice(indexOfCurrentOption, 1);
     }
-    console.log(cpyFilters);
+    console.log(cpyFilters,"filter outcome");
     setFilters(cpyFilters);
     sessionStorage.setItem("filters", JSON.stringify(cpyFilters));
   }
@@ -135,6 +135,8 @@ function ShoppingListing () {
   useEffect(() => {
     if (productDetails !== null) setOpen(true);
   }, [productDetails]);
+  
+  console.log(filters,"filters")
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 p-4 md:p-6">

@@ -22,8 +22,10 @@ const initialFormData = {
     title: "",
     description: "",
     category: "",
-    brand: "",
-    price: "",
+    types: "",
+    size: "",
+    colour:"",
+    price:"",
     salePrice: "",
     totalStock: "",
     averageReview: 0,
@@ -70,7 +72,7 @@ function AdminProducts() {
 
   function isFormValid() {
     return Object.keys(formData)
-      .filter((currentKey) => currentKey !== "averageReview")
+      .filter((currentKey) => currentKey !== "averageReview" && currentKey !== "salePrice")
       .map((key) => formData[key] !== "")
       .every((item) => item);
   };
@@ -83,6 +85,8 @@ function AdminProducts() {
     });
   }
 
+  
+
   const [openCreateProductsDialog,setOpenCreateProductsDialog] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
   const [imageFile, setImageFile] = useState(null);
@@ -91,13 +95,15 @@ function AdminProducts() {
   const [currentEditedId, setCurrentEditedId] = useState(null);
   const dispatch = useDispatch();
   const { Productlist } = useSelector((state) => state.adminProduct)
+  const [SelectedCategory, setSelectedCategory] = useState(null)
+
 
   useEffect(() => {
     dispatch(fetchAllProducts()).then((response) => {
       console.log("fetchAllProducts response:", response);
     });
   }, [dispatch]);
-
+  console.log(formData);
   return (
     <Fragment>
       <div className="mb-5 w-full flex justify-end">
@@ -144,6 +150,8 @@ function AdminProducts() {
               formControls={addProductFormElements}
               buttonText={currentEditedId !== null ? "Edit" : "Add"}
               isBtnDisabled={!isFormValid()}
+              SelectedCategory = {SelectedCategory}
+              setSelectedCategory = {setSelectedCategory}
             />
         </SheetContent>
       </Sheet>

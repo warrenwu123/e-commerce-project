@@ -3,6 +3,7 @@ import { capturePayment } from "@/store/order-slice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function PaypalReturnPage() {
   const dispatch = useDispatch();
@@ -10,6 +11,7 @@ function PaypalReturnPage() {
   const params = new URLSearchParams(location.search);
   const paymentId = params.get("paymentId");
   const payerId = params.get("PayerID");
+  const { orderId } = useSelector((state) => state.shopOrder)
 
   useEffect(() => {
     if (paymentId && payerId) {
@@ -23,6 +25,8 @@ function PaypalReturnPage() {
       });
     }
   }, [paymentId, payerId, dispatch]);
+
+  console.log(orderId,"orderID")
 
   return (
     <Card>

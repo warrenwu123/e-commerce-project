@@ -25,6 +25,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { Skeleton } from './components/ui/skeleton';
 import PaymentReturnPage from './pages/shopping-list/paymentreturn';
+import PaymentCancelPage from './pages/shopping-list/payment-cancel';
 
 function App() {
 
@@ -74,6 +75,7 @@ function App() {
           <Route path="payment-success" element={<PaymentSuccessPage />} />
           <Route path="search" element={<SearchProducts />} />
           <Route path="payment-return" element={<PaymentReturnPage />} />
+          <Route path="paypal-cancel" element={<PaymentCancelPage />} />
 
           </Route>
           <Route path="*" element={<NotFound />}/>

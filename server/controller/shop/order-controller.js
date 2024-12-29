@@ -112,14 +112,14 @@ const capturePayment = async (req, res) => {
     order.orderStatus = "confirmed";
     order.paymentId = paymentId;
     order.payerId = payerId;
-
+    
     for (let item of order.cartItems) {
       let product = await Product.findById(item.productId);
 
-      if (!product) {
-        return res.status(404).json({
+      if (product.totalStock < item.quantity) {
+        return res.status(400).json({
           success: false,
-          message: `Not enough stock for this product ${product.title}`,
+          message: `Insufficient stock for product ${product.title}`,
         });
       }
 

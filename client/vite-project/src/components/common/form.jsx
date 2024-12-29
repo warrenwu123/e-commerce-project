@@ -9,6 +9,7 @@ import {
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
+import { useState } from "react";
 
 function CommonForm({
   formControls,
@@ -17,7 +18,10 @@ function CommonForm({
   onSubmit,
   buttonText,
   isBtnDisabled,
+  SelectedCategory,
+  setSelectedCategory,
 }) {
+
   function renderInputsByComponentType(getControlItem) {
     let element = null;
     const value = formData[getControlItem.name] || "";
@@ -45,24 +49,30 @@ function CommonForm({
         element = (
           <Select
             onValueChange={(value) =>
-              setFormData({
+             { setFormData({
                 ...formData,
                 [getControlItem.name]: value,
-              })
+              });
+              if (getControlItem.name === "category") {
+                setSelectedCategory(value);
             }
+          }}
             value={value}
           >
             <SelectTrigger className="w-full">
               <SelectValue placeholder={getControlItem.label} />
             </SelectTrigger>
             <SelectContent>
-              {getControlItem.options && getControlItem.options.length > 0
-                ? getControlItem.options.map((optionItem) => (
-                    <SelectItem key={optionItem.id} value={optionItem.id}>
-                      {optionItem.label}
-                    </SelectItem>
+              {getControlItem.name === "types" 
+                ? getControlItem.options && SelectedCategory !== null ? getControlItem.options[SelectedCategory].map((optionItem) => (
+                      <SelectItem key={optionItem.id} value={optionItem.id}>
+                        {optionItem.id}
+                      </SelectItem>
                   ))
-                : null}
+                : null : getControlItem.options.map((optionItem) => (
+                  <SelectItem key={optionItem.id} value={optionItem.id}>
+                    {optionItem.id}
+                  </SelectItem>))}
             </SelectContent>
           </Select>
         );

@@ -18,8 +18,9 @@ import { fetchProductDetails } from '../../store/shop-slice';
 import { addToCart } from '../../store/cart-slice';
 import { fetchCartItems } from '../../store/cart-slice';
 import ProductDetailsDialog from '../../components/shopping-list/product-details';
+import { getFeatureImages } from '@/store/common-slice';
+import { useNavigate } from 'react-router-dom';
 
-const featureImageList = [banner1, banner2, banner3];
 
 const categoriesWithIcon = [
   { id: "men", label: "Men", icon: ShirtIcon },
@@ -42,6 +43,8 @@ function ShoppingHome() {
   const dispatch = useDispatch();
   const {productList, productDetails} = useSelector((state) => state.shopProducts);
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
+  const { featureImageList } = useSelector((state) => state.commonfeature);
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -64,6 +67,12 @@ function ShoppingHome() {
       })
     );
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getFeatureImages());
+  }, [dispatch]);
+
+  console.log(featureImageList,"featureImageList")
 
   function handleNavigateToListingPage(getCurrentItem, section) {
     sessionStorage.removeItem("filters");
@@ -103,11 +112,11 @@ function ShoppingHome() {
       {featureImageList && featureImageList.length > 0
           ? featureImageList.map((slide, index) => (
               <img
-                src={slide}
+                src={slide.image}
                 key={index}
                 className={`${
                   index === currentSlide ? "opacity-100" : "opacity-0"
-                } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
+                } absolute top-0 left-0 object-cover transition-opacity duration-1000`}
               />
             ))
           : null}

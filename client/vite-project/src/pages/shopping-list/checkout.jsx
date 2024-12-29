@@ -16,6 +16,7 @@ function ShoppingCheckout() {
   const [currentSelectedAddress, setCurrentSelectedAddress] = useState(null);
   const [isPaymentStart, setIsPaymentStart] = useState(false);
   const { approvalURL } = useSelector((state) => state.shopOrder);
+  const { orderId } = useSelector((state) => state.shopOrder)
   const dispatch = useDispatch();
 
   console.log(currentSelectedAddress, "cartItems");
@@ -81,6 +82,8 @@ function ShoppingCheckout() {
         paymentId: "",
         payerId: "",
       };  
+
+      console.log(orderData,"orderData")
   
       dispatch(createNewOrder(orderData)).then((data) => {
         console.log(data, "ZIhanwu");
@@ -95,6 +98,7 @@ function ShoppingCheckout() {
     if (approvalURL) {
       window.location.href = approvalURL;
     }
+    console.log(orderId,"orderID")
   
 
     
