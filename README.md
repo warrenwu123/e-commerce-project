@@ -44,18 +44,19 @@ This repository contains an e-commerce web application inspired by a YouTube tut
 2. **Install dependencies**:
 
 **For the frontend:**
-
+  ```bash
   cd client/vite-project
   npm install
 
 **For the backend:**
-  
+  ```bash
   cd server
   npm install
 
 
-3. Set up environment variables:
+3. **Set up environment variables:**
   Create a .env file in the server directory with the following content:
+
   # MongoDB Connection
   MONGO_URI=<yourownmongodbURL>
   
@@ -64,17 +65,17 @@ This repository contains an e-commerce web application inspired by a YouTube tut
   CLOUDINARY_API_KEY=<yourowncloudinaryapikey>
   CLOUDINARY_API_SECRET=<yourowncloudinaryapisecret>
 
-*for cloudinary information, you can find it in cloudinary dashboard*
+***for cloudinary information, you can find it in cloudinary dashboard***
 
-4. **start project**
+### Usage
 
 **For the frontend:**
-
+  ```bash
   cd client/vite-project
   npm run dev
 
 **For the backend:**
-  
+  ```bash
   cd server
   npm run dev
  
