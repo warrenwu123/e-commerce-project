@@ -47,11 +47,13 @@ This repository contains an e-commerce web application inspired by a YouTube tut
   ```bash
   cd client/vite-project
   npm install
+  ```
 
 **For the backend:**
   ```bash
   cd server
   npm install
+  ```
 
 
 3. **Set up environment variables:**
@@ -65,17 +67,26 @@ This repository contains an e-commerce web application inspired by a YouTube tut
   CLOUDINARY_API_KEY=<yourowncloudinaryapikey>
   CLOUDINARY_API_SECRET=<yourowncloudinaryapisecret>
 
-***for cloudinary information, you can find it in cloudinary dashboard***
+**for cloudinary information, you can find it in cloudinary dashboard**
 
-### Usage
+## Usage
 
 **For the frontend:**
   ```bash
   cd client/vite-project
   npm run dev
-
+  ```
 **For the backend:**
   ```bash
   cd server
   npm run dev
+  ```
+
+## Contribution 
+1. I added more filter options that make it more convenient,such as color, size,etc.
+2. I change the way of displaying in order page, avoid repetative display of pending and confirm state for one single item
+3. i changed the layout of product-detail page
+
+
+  
  
