@@ -1,3 +1,4 @@
+require("dotenv").config({ path: ".env.local" });
 const express = require("express");
 const mongoose = require("mongoose");
 const cookiePaser = require("cookie-parser");
@@ -14,7 +15,7 @@ const reviewRouter = require("./route/shop/review-route");
 const commonFeatureRouter = require("./route/common/feature-route");
 
 mongoose
-  .connect("mongodb+srv://warrenwu:qewyop58458@cluster0.nxe7y.mongodb.net/")
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((error) => console.log(error));
 
