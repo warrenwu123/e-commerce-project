@@ -23,17 +23,41 @@ export const createNewOrder = createAsyncThunk(
 
 export const capturePayment = createAsyncThunk(
   "/order/capturePayment",
-  async ({ paymentId, payerId, orderId }) => {
-    const response = await axios.post(
-      "http://localhost:5000/api/shop/order/capture",
-      {
-        paymentId,
-        payerId,
-        orderId,
-      }
-    );
+  async ({ paymentId, payerId, orderId }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/shop/order/capture",
+        {
+          paymentId,
+          payerId,
+          orderId,
+        }
+      );
 
-    return response.data;
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(
+        err.response?.data || { success: false, message: err.message }
+      );
+    }
+  }
+);
+
+export const cancelOrder = createAsyncThunk(
+  "/order/cancelOrder",
+  async ({ orderId, token }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/shop/order/cancel",
+        { orderId, token }
+      );
+
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(
+        err.response?.data || { success: false, message: err.message }
+      );
+    }
   }
 );
 
@@ -83,6 +107,11 @@ const shoppingOrderSlice = createSlice({
       })
       .addCase(createNewOrder.rejected, (state) => {
         state.isLoading = false;
+        state.approvalURL = null;
+        state.orderId = null;
+      })
+      .addCase(cancelOrder.fulfilled, (state) => {
+        // Forget the old PayPal link so checkout doesn't redirect back to it.
         state.approvalURL = null;
         state.orderId = null;
       })

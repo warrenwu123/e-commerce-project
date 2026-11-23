@@ -35,7 +35,7 @@ function ShoppingCheckout() {
     : 0;
 
     function handleInitiatePaypalPayment() {
-      if (cartItems.length === 0) {
+      if (!cartItems?.items?.length) {
         toast({
           title: "Your cart is empty. Please add items to proceed",
           variant: "destructive",

@@ -8,7 +8,7 @@ const OrderSchema = new mongoose.Schema({
       productId: String,
       title: String,
       image: String,
-      price: String,
+      price: Number,
       quantity: Number,
     },
   ],
@@ -27,6 +27,7 @@ const OrderSchema = new mongoose.Schema({
   orderDate: Date,
   orderUpdateDate: Date,
   paymentId: String,
+  paypalToken: String,
   payerId: String,
 });
 

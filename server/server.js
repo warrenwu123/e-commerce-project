@@ -1,4 +1,4 @@
-require("dotenv").config({ path: ".env.local" });
+require("dotenv").config({ path: require("path").join(__dirname, ".env") });
 const express = require("express");
 const mongoose = require("mongoose");
 const cookiePaser = require("cookie-parser");
@@ -13,6 +13,7 @@ const adminOrderRouter = require("./route/admin/order-route");
 const shopSearchRouter = require("./route/shop/search-contoller");
 const reviewRouter = require("./route/shop/review-route");
 const commonFeatureRouter = require("./route/common/feature-route");
+const paypalWebhookRouter = require("./route/paypal/webhook-route");
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -25,7 +26,7 @@ const PORT = process.env.PORT || 5000;
   
 app.use(
     cors({
-      origin: "http://localhost:5173",
+      origin: process.env.CLIENT_URL || "http://localhost:5173",
       methods: ["GET", "POST", "DELETE", "PUT"],
       allowedHeaders: [
         "Content-Type",
@@ -54,5 +55,6 @@ app.use("/api/admin/order", adminOrderRouter);
 app.use("/api/shop/search", shopSearchRouter);
 app.use("/api/shop/review", reviewRouter);
 app.use("/api/common/feature", commonFeatureRouter);
+app.use("/api/paypal", paypalWebhookRouter);
 
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));

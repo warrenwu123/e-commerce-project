@@ -63,6 +63,10 @@ This repository contains an e-commerce web application inspired by a YouTube tut
    CLOUDINARY_CLOUD_NAME=yourowncloudinaryname
    CLOUDINARY_API_KEY=yourowncloudinaryapikey
    CLOUDINARY_API_SECRET=yourowncloudinaryapisecret
+   PAYPAL_MODE=sandbox
+   PAYPAL_CLIENT_ID=yourpaypalclientid
+   PAYPAL_CLIENT_SECRET=yourpaypalclientsecret
+   CLIENT_URL=http://localhost:5173
 ```
 
 **for cloudinary information, you can find it in cloudinary dashboard**
