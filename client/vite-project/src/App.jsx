@@ -44,6 +44,10 @@ function App() {
   return (
      <div className="flex flex-col overflow-hidden bg-white">
         <Routes>
+          {/* CheckAuth sends "/" to login, the admin dashboard or the shop home */}
+          <Route path="/" element={
+            <CheckAuth isAuthenticated={isAuthenticated} user={user} />
+          } />
           <Route path="/auth" element={
             <CheckAuth isAuthenticated={isAuthenticated} user={user}>
               <AuthLayout />
@@ -79,7 +83,7 @@ function App() {
 
           </Route>
           <Route path="*" element={<NotFound />}/>
-          <Route path ="/auth-page" element = {<UnauthPage />} />
+          <Route path ="/unauth-page" element = {<UnauthPage />} />
         </Routes>
         <Toaster/>
      </div>
