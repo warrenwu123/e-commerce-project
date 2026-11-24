@@ -1,0 +1,85 @@
+# Build the Vite/React front end in client/vite-project and deploy it to
+# GitHub Pages.
+#
+# GitHub only runs workflows stored in .github/workflows at the repository
+# root, so this file lives here and points at client/vite-project.
+#
+# One-time setup in the GitHub repo:
+#   1. Settings > Pages > Build and deployment > Source: "GitHub Actions"
+#   2. Settings > Secrets and variables > Actions > Variables tab:
+#        VITE_API_URL = https://<your-deployed-backend>   (no trailing slash)
+#
+# Site URL: https://<owner>.github.io/<repo>/
+
+name: Deploy front end to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "client/vite-project/**"
+      - ".github/workflows/deploy-frontend.yml"
+  workflow_dispatch: # allows a manual run from the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deployment at a time; don't cancel one that's already running.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+defaults:
+  run:
+    working-directory: client/vite-project
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: client/vite-project/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+        continue-on-error: true # report problems without blocking deploys
+
+      - name: Build
+        run: npm run build
+        env:
+          # Served from /<repo-name>/ (e.g. /e-commerce-project/)
+          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+
+      - name: Add SPA fallback for client-side routes
+        # GitHub Pages has no rewrite rules. Serving index.html as 404.html lets
+        # deep links like /e-commerce-project/shop/home load the React app.
+        run: cp dist/index.html dist/404.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: client/vite-project/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

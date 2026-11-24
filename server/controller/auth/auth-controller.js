@@ -1,5 +1,14 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+
+// When the front end is on another site (e.g. GitHub Pages) the browser only
+// sends the auth cookie if it is SameSite=None and Secure (HTTPS backend).
+const crossSite = process.env.NODE_ENV === "production";
+const cookieOptions = {
+  httpOnly: true,
+  secure: crossSite,
+  sameSite: crossSite ? "none" : "lax",
+};
 const User = require("../../model/user");
 
 //register
@@ -68,7 +77,7 @@ const loginUser = async (req, res) => {
       { expiresIn: "60m" }
     );
 
-    res.cookie("token", token, { httpOnly: true, secure: false }).json({
+    res.cookie("token", token, cookieOptions).json({
       success: true,
       message: "Logged in successfully",
       user: {
@@ -90,7 +99,7 @@ const loginUser = async (req, res) => {
 //logout
 
 const logoutUser = (req, res) => {
-  res.clearCookie("token").json({
+  res.clearCookie("token", cookieOptions).json({
     success: true,
     message: "Logged out successfully!",
   });

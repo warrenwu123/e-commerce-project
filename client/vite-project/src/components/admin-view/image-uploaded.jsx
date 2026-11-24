@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "@/config/api";
 import React from 'react'
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
@@ -47,7 +48,7 @@ function ProductImageUploaded({
       const data = new FormData();
       data.append("my_file", imageFile);
       const response = await axios.post(
-        "http://localhost:5000/api/admin/products/upload-image",
+        `${API_BASE_URL}/api/admin/products/upload-image`,
         data
       );
       console.log(response, "response");

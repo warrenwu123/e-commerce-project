@@ -23,7 +23,7 @@ function PaypalReturnPage() {
     dispatch(capturePayment({ paymentId, payerId, orderId })).then((data) => {
       if (data?.payload?.success) {
         sessionStorage.removeItem("currentOrderId");
-        window.location.href = "/shop/payment-success";
+        window.location.href = `${import.meta.env.BASE_URL}shop/payment-success`;
       } else {
         setError(
           data?.payload?.message || "We could not confirm your payment."
